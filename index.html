@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ioannes Schroeder — Médico Laboral & BI Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #0a0d12;
+    --bg2:     #0f1318;
+    --bg3:     #151b23;
+    --border:  #1e2a38;
+    --accent:  #00c8ff;
+    --accent2: #0077ff;
+    --green:   #00e5a0;
+    --text:    #e2eaf4;
+    --muted:   #5a7080;
+    --card:    #111820;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(0,200,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,200,255,0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 60px;
+    background: rgba(10,13,18,0.93); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.12em; color: var(--accent); white-space: nowrap; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+  .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--muted); border-radius: 2px; transition: all .3s; }
+  .nav-open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+  .nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* HERO */
+  section { position: relative; z-index: 1; }
+  #hero { min-height: 100vh; display: flex; align-items: center; padding: 80px 48px 60px; max-width: 1200px; margin: 0 auto; }
+  .hero-layout { display: grid; grid-template-columns: 1fr 340px; gap: 72px; align-items: center; width: 100%; }
+  .hero-tag { display: inline-block; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.18em; color: var(--accent); text-transform: uppercase; border: 1px solid rgba(0,200,255,0.3); padding: 5px 14px; border-radius: 2px; margin-bottom: 28px; animation: fadeUp .6s ease both; }
+  h1 { font-family: 'Syne', sans-serif; font-size: clamp(42px, 6vw, 80px); font-weight: 800; line-height: 0.95; letter-spacing: -0.02em; animation: fadeUp .6s .1s ease both; }
+  h1 span { color: var(--accent); }
+  .hero-sub { margin-top: 24px; font-size: 16px; line-height: 1.75; color: var(--muted); animation: fadeUp .6s .2s ease both; }
+  .hero-sub strong { color: var(--text); font-weight: 500; }
+  .hero-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; animation: fadeUp .6s .3s ease both; }
+  .chip { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.1em; padding: 5px 12px; border-radius: 3px; border: 1px solid var(--border); color: var(--muted); background: var(--bg2); }
+  .chip.green { border-color: rgba(0,229,160,.35); color: var(--green); background: rgba(0,229,160,.06); }
+  .chip.blue  { border-color: rgba(0,200,255,.35); color: var(--accent); background: rgba(0,200,255,.06); }
+  .hero-cta { display: flex; gap: 14px; margin-top: 36px; animation: fadeUp .6s .4s ease both; flex-wrap: wrap; }
+  .btn { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 13px 26px; border-radius: 3px; cursor: pointer; transition: all .2s; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-primary { background: var(--accent); color: var(--bg); border: 1px solid var(--accent); }
+  .btn-primary:hover { background: transparent; color: var(--accent); }
+  .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* PHOTO */
+  .hero-photo-wrap { animation: fadeUp .7s .25s ease both; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+  .hero-photo-frame { position: relative; width: 280px; height: 340px; }
+  .hero-photo-frame::before { content: ''; position: absolute; top: 14px; right: -14px; width: 100%; height: 100%; border: 1px solid rgba(0,200,255,.25); border-radius: 4px; z-index: 0; transition: transform .3s; }
+  .hero-photo-frame:hover::before { transform: translate(5px, 5px); }
+  .hero-photo-frame img { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; object-position: center top; border-radius: 4px; border: 1px solid var(--border); filter: grayscale(15%); transition: filter .3s; display: block; }
+  .hero-photo-frame:hover img { filter: grayscale(0%); }
+  .hero-photo-name { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .14em; color: var(--muted); text-align: center; text-transform: uppercase; line-height: 1.6; }
+
+  .scroll-hint { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .15em; color: var(--muted); animation: fadeUp .6s .9s ease both; }
+  .scroll-line { width: 1px; height: 36px; background: linear-gradient(to bottom, var(--accent), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+
+  /* PERFIL */
+  #perfil { padding: 100px 48px; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .section-label { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+  h2 { font-family: 'Syne', sans-serif; font-size: clamp(30px, 4vw, 46px); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 24px; }
+  .about-text { font-size: 15px; line-height: 1.85; color: #8fa0b0; }
+  .about-text strong { color: var(--text); font-weight: 500; }
+  .tool-logos { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; align-items: center; }
+  .tool-badge { display: flex; align-items: center; gap: 8px; background: var(--card); border: 1px solid var(--border); padding: 7px 13px; border-radius: 3px; font-size: 12px; color: var(--muted); transition: border-color .2s, color .2s; }
+  .tool-badge:hover { border-color: rgba(0,200,255,.4); color: var(--text); }
+  .tool-badge svg { width: 17px; height: 17px; flex-shrink: 0; }
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .stat-box { background: var(--card); padding: 28px 24px; display: flex; flex-direction: column; gap: 6px; }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 38px; font-weight: 800; line-height: 1; color: var(--accent); }
+  .stat-label { font-size: 13px; color: var(--muted); line-height: 1.4; }
+  .skills-list { margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
+  .skill-row { display: flex; flex-direction: column; gap: 6px; }
+  .skill-header { display: flex; justify-content: space-between; font-size: 13px; }
+  .skill-name { color: var(--text); font-weight: 500; }
+  .skill-pct { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--accent); }
+  .skill-bar { height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .skill-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--accent2), var(--accent)); width: 0; transition: width 1.2s cubic-bezier(.4,0,.2,1); }
+
+  /* EXPERIENCIA */
+  #experiencia { padding: 100px 48px; max-width: 1200px; margin: 0 auto; }
+  .exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
+  .exp-card { background: var(--card); border: 1px solid var(--border); padding: 32px; border-radius: 4px; transition: border-color .2s, transform .2s; position: relative; overflow: hidden; }
+  .exp-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent2), var(--accent)); opacity: 0; transition: opacity .2s; }
+  .exp-card:hover { border-color: rgba(0,200,255,.3); transform: translateY(-3px); }
+  .exp-card:hover::before { opacity: 1; }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+  .exp-dates { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: .08em; }
+  .exp-logo-badge { border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: 'Syne', sans-serif; font-weight: 800; letter-spacing: .02em; }
+  .exp-title { font-family: 'Syne', sans-serif; font-size: 19px; font-weight: 700; margin-bottom: 4px; }
+  .exp-company { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .exp-bullets li { font-size: 13px; color: #7a909f; line-height: 1.6; padding-left: 16px; position: relative; }
+  .exp-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 11px; }
+  .exp-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; }
+  .exp-tag { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .06em; padding: 4px 10px; border: 1px solid var(--border); color: var(--muted); border-radius: 2px; }
+
+  /* PORTFOLIO */
+  #portafolio { padding: 100px 48px; max-width: 1200px; margin: 0 auto; }
+  .portfolio-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; flex-wrap: wrap; gap: 20px; }
+  .portfolio-note { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: .06em; border: 1px solid var(--border); padding: 8px 16px; border-radius: 2px; }
+  .portfolio-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  .p-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; transition: border-color .2s, transform .2s; text-decoration: none; color: inherit; }
+  .p-card:hover { border-color: rgba(0,200,255,.4); transform: translateY(-4px); }
+  .p-card-thumb { height: 148px; background: var(--bg3); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border); font-size: 36px; position: relative; overflow: hidden; }
+  .p-card-thumb::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,200,255,.08), rgba(0,119,255,.08)); }
+  .p-thumb-logo { position: absolute; bottom: 8px; right: 8px; z-index: 2; width: 26px; height: 26px; background: rgba(10,13,18,.8); border-radius: 4px; padding: 4px; display: flex; align-items: center; justify-content: center; }
+  .p-thumb-logo svg { width: 18px; height: 18px; }
+  .p-card-body { padding: 18px 20px; flex: 1; display: flex; flex-direction: column; }
+  .p-card-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .14em; color: var(--accent); text-transform: uppercase; margin-bottom: 7px; }
+  .p-card-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
+  .p-card-desc { font-size: 12px; color: var(--muted); line-height: 1.6; flex: 1; }
+  .p-card-footer { padding: 12px 20px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .p-status { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .08em; display: flex; align-items: center; gap: 6px; }
+  .p-status-dot { width: 6px; height: 6px; border-radius: 50%; }
+  .dot-live  { background: var(--green); box-shadow: 0 0 6px var(--green); }
+  .dot-local { background: #f0a500; box-shadow: 0 0 6px #f0a500; }
+  .p-arrow { font-size: 14px; color: var(--muted); transition: color .2s, transform .2s; }
+  .p-card:hover .p-arrow { color: var(--accent); transform: translateX(4px); }
+
+  /* CERTS */
+  #certificaciones { padding: 80px 48px; max-width: 1200px; margin: 0 auto; }
+  .cert-row { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 40px; }
+  .cert-card { background: var(--card); border: 1px solid var(--border); padding: 20px 24px; border-radius: 4px; display: flex; align-items: center; gap: 16px; flex: 1 1 250px; transition: border-color .2s; }
+  .cert-card:hover { border-color: rgba(0,200,255,.3); }
+  .cert-icon-wrap { width: 44px; height: 44px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: var(--bg3); border-radius: 8px; padding: 5px; }
+  .cert-icon-wrap svg { width: 30px; height: 30px; }
+  .cert-name { font-size: 13px; font-weight: 500; }
+  .cert-issuer { font-size: 12px; color: var(--muted); margin-top: 3px; }
+
+  /* CONTACT */
+  #contacto { padding: 100px 48px; max-width: 800px; margin: 0 auto; text-align: center; }
+  .contact-box { background: var(--card); border: 1px solid var(--border); padding: 52px; border-radius: 4px; margin-top: 40px; position: relative; overflow: hidden; }
+  .contact-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+  .contact-email { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; color: var(--accent); text-decoration: none; display: inline-block; margin: 18px 0 30px; transition: opacity .2s; }
+  .contact-email:hover { opacity: .7; }
+  .contact-links { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--border); padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); flex-wrap: wrap; gap: 12px; position: relative; z-index: 1; }
+  .divider { height: 1px; background: var(--border); max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+  @keyframes scrollPulse { 0%,100% { opacity: .3; } 50% { opacity: 1; } }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 860px) {
+    nav { padding: 0 24px; }
+    .nav-toggle { display: flex; }
+    .nav-links { position: fixed; top: 60px; left: 0; right: 0; flex-direction: column; gap: 0; background: rgba(10,13,18,.98); border-bottom: 1px solid var(--border); max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+    .nav-open .nav-links { max-height: 400px; }
+    .nav-links a { padding: 16px 24px; border-bottom: 1px solid var(--border); font-size: 13px; }
+    #hero { padding: 90px 24px 60px; }
+    .hero-layout { grid-template-columns: 1fr; gap: 40px; }
+    .hero-photo-frame { width: 200px; height: 240px; }
+    .hero-photo-wrap { align-items: flex-start; }
+    #perfil { grid-template-columns: 1fr; padding: 70px 24px; gap: 48px; }
+    #experiencia, #portafolio, #certificaciones, #contacto { padding: 70px 24px; }
+    .exp-grid { grid-template-columns: 1fr; }
+    .portfolio-grid { grid-template-columns: 1fr 1fr; }
+    footer { padding: 20px 24px; }
+  }
+  @media (max-width: 540px) {
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .hero-cta { flex-direction: column; }
+    .contact-box { padding: 32px 20px; }
+    .hero-photo-frame { width: 160px; height: 194px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-logo">ISH_<span style="opacity:.4">portfolio</span></div>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Menú"><span></span><span></span><span></span></button>
+  <div class="nav-links" id="nav-links">
+    <a href="#perfil">Perfil</a>
+    <a href="#experiencia">Experiencia</a>
+    <a href="#portafolio">Portafolio</a>
+    <a href="#certificaciones">Certificaciones</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero" style="position:relative;">
+  <div class="hero-layout" style="position:relative;z-index:1;">
+    <!-- texto -->
+    <div>
+      <div class="hero-tag">Médico Laboral · OSH Admin · BI Analyst Jr.</div>
+      <h1>Ioannes<br><span>Schroeder</span><br>Hernández</h1>
+      <p class="hero-sub">Médico General con <strong>5 años de experiencia</strong> en salud ocupacional y seguridad industrial. Especializado en <strong>análisis de datos y automatización de indicadores</strong> aplicados a la gestión de la salud laboral.</p>
+      <div class="hero-chips">
+        <span class="chip blue">ISO 45001:2018</span>
+        <span class="chip blue">Power BI</span>
+        <span class="chip blue">Looker Studio</span>
+        <span class="chip green">Python</span>
+        <span class="chip green">SQL</span>
+        <span class="chip green">Google Cloud</span>
+        <span class="chip">NOMs STPS</span>
+        <span class="chip">SGMM</span>
+      </div>
+      <div class="hero-cta">
+        <a href="#portafolio" class="btn btn-primary">Ver Portafolio</a>
+        <a href="#contacto" class="btn btn-ghost">Contacto</a>
+      </div>
+    </div>
+    <!-- foto -->
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-frame">
+        <img src="gem_color.jpg" alt="Ioannes Schroeder Hernández">
+      </div>
+      <div class="hero-photo-name">Ioannes Schroeder H.<br><span style="color:var(--accent);font-size:10px;">Pachuca, Hidalgo · MX</span></div>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div><span>scroll</span></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PERFIL -->
+<section id="perfil">
+  <div class="reveal">
+    <div class="section-label">// 01 — Perfil</div>
+    <h2>Donde la medicina<br>se encuentra con los datos</h2>
+    <p class="about-text">Médico General con experiencia en administración de servicios médicos empresariales en los sectores de autotransporte de pasajeros y comercio al por menor. Especializado en cumplimiento normativo, gestión preventiva y en la <strong>automatización de reportes y visualización de indicadores</strong>.</p>
+    <p class="about-text" style="margin-top:14px;">Formación activa en <strong>Business Intelligence</strong> con ruta en Platzi, certificación Google Cloud y experiencia real en producción con Power BI, Looker Studio y Python.</p>
+
+    <!-- Tool logos (SVG inline, sin dependencia externa) -->
+    <div class="tool-logos">
+      <div class="tool-badge">
+        <!-- Power BI -->
+        <svg viewBox="0 0 24 24"><rect width="4" height="10" x="1" y="14" rx="1" fill="#F2C811"/><rect width="4" height="14" x="7" y="10" rx="1" fill="#F2C811" opacity=".85"/><rect width="4" height="18" x="13" y="6" rx="1" fill="#F2C811" opacity=".65"/><rect width="4" height="22" x="19" y="2" rx="1" fill="#F2C811" opacity=".45"/></svg>
+        Power BI
+      </div>
+      <div class="tool-badge">
+        <!-- Looker Studio (Google colors) -->
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="5" fill="#4285F4"/><circle cx="15" cy="15" r="5" fill="#EA4335" opacity=".85"/><circle cx="15" cy="9" r="5" fill="#FBBC05" opacity=".85"/><circle cx="9" cy="15" r="5" fill="#34A853" opacity=".85"/></svg>
+        Looker Studio
+      </div>
+      <div class="tool-badge">
+        <!-- Google Cloud -->
+        <svg viewBox="0 0 24 24"><path d="M12 5.5l2.6 4.5H9.4L12 5.5zm-7.5 13H8l1.8-3.1H5.3L4.5 18.5zm11.2-3.1L17.5 18.5H21l-1.8-3.1h-3.5zM12 3L2 21h20L12 3z" fill="#4285F4"/></svg>
+        Google Cloud
+      </div>
+      <div class="tool-badge">
+        <!-- Python -->
+        <svg viewBox="0 0 24 24"><path d="M11.9 2C9.2 2 9.5 3.1 9.5 3.1V5h5v.5H7.5S5 5.2 5 8s2.8 2.6 2.8 2.6h1.7v-1.3S9.3 8 10.5 8h4.8s2.7.04 2.7-2.6V4.2S18.3 2 11.9 2zm-1.4 1.5a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8zM12.1 22c2.7 0 2.4-1.1 2.4-1.1V18.9h-5v-.5h7s2.5.3 2.5-2.5-2.8-2.6-2.8-2.6h-1.7v1.3s.2 1.3-1 1.3H9.7S7 15.9 7 18.5v2.2S6.7 22 12.1 22zm1.4-1.5a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8z" fill="#3776AB"/></svg>
+        Python
+      </div>
+      <div class="tool-badge">
+        <!-- Excel -->
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 14H9l-1-2-1 2H5l2-3.5L5 9h2l1 2 1-2h2l-2 3.5L13 16zm1-9V3.5L17.5 7H14z" fill="#217346"/></svg>
+        Excel
+      </div>
+      <div class="tool-badge">
+        <!-- GitHub -->
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.66-.22.66-.48v-1.69c-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.26-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.38.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48C19.14 20.16 22 16.42 22 12c0-5.52-4.48-10-10-10z" fill="#e2eaf4"/></svg>
+        GitHub
+      </div>
+      <div class="tool-badge">
+        <!-- LinkedIn -->
+        <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zm1.78 13.02H3.56V9h3.56v11.45zM22.23 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.46C23.2 24 24 23.23 24 22.28V1.72C24 .77 23.2 0 22.23 0z" fill="#0A66C2"/></svg>
+        LinkedIn
+      </div>
+    </div>
+
+    <div class="skills-list" style="margin-top:32px;">
+      <div class="skill-row"><div class="skill-header"><span class="skill-name">Power BI / Looker Studio</span><span class="skill-pct">90%</span></div><div class="skill-bar"><div class="skill-fill" data-w="90"></div></div></div>
+      <div class="skill-row"><div class="skill-header"><span class="skill-name">Normativa SST (NOMs / ISO 45001)</span><span class="skill-pct">92%</span></div><div class="skill-bar"><div class="skill-fill" data-w="92"></div></div></div>
+      <div class="skill-row"><div class="skill-header"><span class="skill-name">Excel avanzado / Google Sheets</span><span class="skill-pct">85%</span></div><div class="skill-bar"><div class="skill-fill" data-w="85"></div></div></div>
+      <div class="skill-row"><div class="skill-header"><span class="skill-name">Python / SQL</span><span class="skill-pct">45%</span></div><div class="skill-bar"><div class="skill-fill" data-w="45"></div></div></div>
+      <div class="skill-row"><div class="skill-header"><span class="skill-name">Google Cloud Platform</span><span class="skill-pct">55%</span></div><div class="skill-bar"><div class="skill-fill" data-w="55"></div></div></div>
+    </div>
+  </div>
+
+  <div class="reveal" style="transition-delay:.15s">
+    <div class="stats-grid">
+      <div class="stat-box"><div class="stat-num">5</div><div class="stat-label">Años de experiencia en salud ocupacional</div></div>
+      <div class="stat-box"><div class="stat-num">1,600</div><div class="stat-label">Colaboradores bajo resguardo médico</div></div>
+      <div class="stat-box"><div class="stat-num">15</div><div class="stat-label">Personas coordinadas en 5 ciudades</div></div>
+      <div class="stat-box"><div class="stat-num">−50%</div><div class="stat-label">Reducción en tiempo de reportes semanales</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCIA -->
+<section id="experiencia">
+  <div class="reveal">
+    <div class="section-label">// 02 — Experiencia</div>
+    <h2>Trayectoria profesional</h2>
+  </div>
+  <div class="exp-grid">
+    <div class="exp-card reveal" style="transition-delay:.1s">
+      <div class="exp-header">
+        <div class="exp-dates">AGO. 2021 — ABR. 2025</div>
+        <div class="exp-logo-badge" style="background:#e2000f;color:#fff;font-size:13px;padding:6px 10px;height:36px;letter-spacing:.05em;">OXXO</div>
+      </div>
+      <div class="exp-title">Coordinador de Salud Ocupacional</div>
+      <div class="exp-company">Cadena Comercial OXXO — Pachuca de Soto, Hidalgo</div>
+      <ul class="exp-bullets">
+        <li>Administré el servicio médico para <strong>1,600 colaboradores</strong> con enfoque preventivo en SST.</li>
+        <li>Automaticé reportes con Python + Power BI, reduciendo el tiempo de generación en un <strong>50%</strong>.</li>
+        <li>Desarrollé dashboards SASSO de accidentabilidad y ausentismo en tiempo real.</li>
+        <li>Planifiqué campañas de salud, exámenes preventivos y negocié convenios SGMM.</li>
+        <li>Gestioné inventario, pagos y coordiné con IMSS y STPS (ST-7, ST-9).</li>
+      </ul>
+      <div class="exp-tags"><span class="exp-tag">Power BI</span><span class="exp-tag">Python</span><span class="exp-tag">ISO 45001</span><span class="exp-tag">SGMM</span><span class="exp-tag">STPS</span></div>
+    </div>
+
+    <div class="exp-card reveal" style="transition-delay:.2s">
+      <div class="exp-header">
+        <div class="exp-dates">MAR. 2020 — JUL. 2021</div>
+        <div class="exp-logo-badge" style="background:#1a3a6e;color:#fff;font-size:11px;padding:6px 10px;height:36px;text-align:center;line-height:1.2;">AVM<br><span style="font-size:9px;opacity:.7">S.A.</span></div>
+      </div>
+      <div class="exp-title">Médico Laboral</div>
+      <div class="exp-company">Autotransportes del Valle del Mezquital S.A. de C.V. — Tula de Allende, Hgo.</div>
+      <ul class="exp-bullets">
+        <li>Coordiné equipo de <strong>15 personas</strong> en consultorios de 5 ciudades simultáneas.</li>
+        <li>Fungí como <strong>Data Lead</strong>: indicadores, inventario, proyecciones y metas del área médica.</li>
+        <li>Implementé dashboards en Power BI y Google Data Studio para seguimiento operativo.</li>
+        <li>Investigué accidentes e implementé acciones correctivas de seguridad.</li>
+        <li>Operé en empresa certificada bajo <strong>ISO 9001</strong> — Sistema de Gestión de Calidad.</li>
+      </ul>
+      <div class="exp-tags"><span class="exp-tag">Data Studio</span><span class="exp-tag">ISO 9001</span><span class="exp-tag">Liderazgo</span><span class="exp-tag">HTML</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PORTAFOLIO -->
+<section id="portafolio">
+  <div class="reveal">
+    <div class="portfolio-header">
+      <div><div class="section-label">// 03 — Portafolio</div><h2>Proyectos destacados</h2></div>
+      <div class="portfolio-note">🟢 En línea &nbsp;|&nbsp; 🟡 Próximamente</div>
+    </div>
+  </div>
+  <div class="portfolio-grid">
+
+    <!-- Power BI SVG reutilizable -->
+    <a href="#" class="p-card reveal" style="transition-delay:.05s">
+      <div class="p-card-thumb">📊<div class="p-thumb-logo"><svg viewBox="0 0 24 24"><rect width="4" height="10" x="1" y="14" rx="1" fill="#F2C811"/><rect width="4" height="14" x="7" y="10" rx="1" fill="#F2C811" opacity=".8"/><rect width="4" height="18" x="13" y="6" rx="1" fill="#F2C811" opacity=".6"/><rect width="4" height="22" x="19" y="2" rx="1" fill="#F2C811" opacity=".4"/></svg></div></div>
+      <div class="p-card-body"><div class="p-card-label">Power BI · Salud Laboral</div><div class="p-card-title">Dashboard de Indicadores SASSO</div><div class="p-card-desc">Tablero de mando con métricas de accidentabilidad, ausentismo y enfermedad general. Filtros por área y comparativas históricas.</div></div>
+      <div class="p-card-footer"><div class="p-status"><div class="p-status-dot dot-live"></div><span style="color:var(--green)">En línea</span></div><div class="p-arrow">→</div></div>
+    </a>
+
+    <a href="#" class="p-card reveal" style="transition-delay:.1s">
+      <div class="p-card-thumb">🗺️<div class="p-thumb-logo"><svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="5" fill="#4285F4"/><circle cx="15" cy="15" r="5" fill="#EA4335" opacity=".85"/><circle cx="15" cy="9" r="5" fill="#FBBC05" opacity=".85"/><circle cx="9" cy="15" r="5" fill="#34A853" opacity=".85"/></svg></div></div>
+      <div class="p-card-body"><div class="p-card-label">Looker Studio · Georreferenciación</div><div class="p-card-title">Mapa de Tiendas</div><div class="p-card-desc">Visualización georreferenciada de puntos de servicio con datos operativos superpuestos y análisis de patrones territoriales.</div></div>
+      <div class="p-card-footer"><div class="p-status"><div class="p-status-dot dot-live"></div><span style="color:var(--green)">En línea</span></div><div class="p-arrow">→</div></div>
+    </a>
+
+    <a href="#" class="p-card reveal" style="transition-delay:.15s">
+      <div class="p-card-thumb">🏗️<div class="p-thumb-logo"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.66-.22.66-.48v-1.69c-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.26-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.38.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48C19.14 20.16 22 16.42 22 12c0-5.52-4.48-10-10-10z" fill="#e2eaf4"/></svg></div></div>
+      <div class="p-card-body"><div class="p-card-label">HTML · Python · Estructura</div><div class="p-card-title">Estructura de Empleados HTML</div><div class="p-card-desc">Reporte interactivo de plantilla y asignación de turnos generado dinámicamente con filtros por criterios operativos.</div></div>
+      <div class="p-card-footer"><div class="p-status"><div class="p-status-dot dot-live"></div><span style="color:var(--green)">En línea</span></div><div class="p-arrow">→</div></div>
+    </a>
+
+    <a href="#" class="p-card reveal" style="transition-delay:.2s">
+      <div class="p-card-thumb">⏱️<div class="p-thumb-logo"><svg viewBox="0 0 24 24"><rect width="4" height="10" x="1" y="14" rx="1" fill="#F2C811"/><rect width="4" height="14" x="7" y="10" rx="1" fill="#F2C811" opacity=".8"/><rect width="4" height="18" x="13" y="6" rx="1" fill="#F2C811" opacity=".6"/><rect width="4" height="22" x="19" y="2" rx="1" fill="#F2C811" opacity=".4"/></svg></div></div>
+      <div class="p-card-body"><div class="p-card-label">Power BI · Operaciones</div><div class="p-card-title">Aprovechamiento de Turnos</div><div class="p-card-desc">Análisis de eficiencia de turnos médicos. Detecta patrones de demanda, tiempos de espera y oportunidades de optimización.</div></div>
+      <div class="p-card-footer"><div class="p-status"><div class="p-status-dot dot-live"></div><span style="color:var(--green)">En línea</span></div><div class="p-arrow">→</div></div>
+    </a>
+
+    <a href="#" class="p-card reveal" style="transition-delay:.25s">
+      <div class="p-card-thumb">⚙️<div class="p-thumb-logo"><svg viewBox="0 0 24 24"><path d="M11.9 2C9.2 2 9.5 3.1 9.5 3.1V5h5v.5H7.5S5 5.2 5 8s2.8 2.6 2.8 2.6h1.7v-1.3S9.3 8 10.5 8h4.8s2.7.04 2.7-2.6V4.2S18.3 2 11.9 2zm-1.4 1.5a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8zM12.1 22c2.7 0 2.4-1.1 2.4-1.1V18.9h-5v-.5h7s2.5.3 2.5-2.5-2.8-2.6-2.8-2.6h-1.7v1.3s.2 1.3-1 1.3H9.7S7 15.9 7 18.5v2.2S6.7 22 12.1 22zm1.4-1.5a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8z" fill="#3776AB"/></svg></div></div>
+      <div class="p-card-body"><div class="p-card-label">Python · Cloud · ETL</div><div class="p-card-title">Pipeline ETL de Reportes</div><div class="p-card-desc">Automatización del proceso de extracción, transformación y carga hacia plataformas de visualización. Reducción del 50% en tiempo de reporte.</div></div>
+      <div class="p-card-footer"><div class="p-status"><div class="p-status-dot dot-local"></div><span style="color:#f0a500">Próximamente</span></div><div class="p-arrow" style="opacity:.3">→</div></div>
+    </a>
+
+    <a href="#" class="p-card reveal" style="transition-delay:.3s">
+      <div class="p-card-thumb">🏛️<div class="p-thumb-logo"><svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="5" fill="#4285F4"/><circle cx="15" cy="15" r="5" fill="#EA4335" opacity=".85"/><circle cx="15" cy="9" r="5" fill="#FBBC05" opacity=".85"/><circle cx="9" cy="15" r="5" fill="#34A853" opacity=".85"/></svg></div></div>
+      <div class="p-card-body"><div class="p-card-label">Looker Studio · Sector Público</div><div class="p-card-title">Dashboard Servicios Públicos</div><div class="p-card-desc">Indicadores de cobertura y rendimiento para servicios de atención pública con integración de fuentes institucionales.</div></div>
+      <div class="p-card-footer"><div class="p-status"><div class="p-status-dot dot-local"></div><span style="color:#f0a500">Próximamente</span></div><div class="p-arrow" style="opacity:.3">→</div></div>
+    </a>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CERTIFICACIONES -->
+<section id="certificaciones">
+  <div class="reveal">
+    <div class="section-label">// 04 — Certificaciones</div>
+    <h2>Formación y acreditaciones</h2>
+  </div>
+  <div class="cert-row reveal" style="transition-delay:.1s">
+
+    <div class="cert-card">
+      <div class="cert-icon-wrap">
+        <svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="#1a3a6e"/><text x="16" y="21" text-anchor="middle" fill="white" font-size="14" font-weight="bold" font-family="Arial">M</text></svg>
+      </div>
+      <div><div class="cert-name">Médico Cirujano — Cédula 11614203</div><div class="cert-issuer">Universidad Autónoma del Estado de Hidalgo (UAEH)</div></div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-icon-wrap">
+        <svg viewBox="0 0 32 32"><rect width="32" height="32" rx="4" fill="#005CA9"/><text x="16" y="14" text-anchor="middle" fill="white" font-size="7" font-weight="bold" font-family="Arial">ISO</text><text x="16" y="23" text-anchor="middle" fill="white" font-size="6" font-family="Arial">45001</text></svg>
+      </div>
+      <div><div class="cert-name">ISO 45001:2018 — Certified 2026</div><div class="cert-issuer">Sistema de Gestión en SSO · Continuing Professional Development</div></div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-icon-wrap">
+        <svg viewBox="0 0 32 32"><path d="M16 4l3.2 5.5H12.8L16 4zm-10 16h4.3l2.2-3.8H7.8L6 20zm13.5-3.8L21.7 20H26l-2.2-3.8h-4.3zM16 1L3 23h26L16 1z" fill="#4285F4"/></svg>
+      </div>
+      <div><div class="cert-name">Google Cloud Platform</div><div class="cert-issuer">Load Balancing · App Dev Environment · Secure Cloud Network</div></div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-icon-wrap">
+        <svg viewBox="0 0 32 32"><rect width="32" height="32" rx="4" fill="#98CA3F"/><text x="16" y="22" text-anchor="middle" fill="white" font-size="18" font-weight="bold" font-family="Arial">P</text></svg>
+      </div>
+      <div><div class="cert-name">Business Intelligence — Ruta de aprendizaje</div><div class="cert-issuer">Platzi · En curso (2024–2026)</div></div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="reveal">
+    <div class="section-label" style="text-align:center">// 05 — Contacto</div>
+    <h2 style="text-align:center">Hablemos</h2>
+    <p style="color:var(--muted);font-size:15px;margin-top:12px;text-align:center;">Abierto a oportunidades en salud ocupacional, seguridad industrial y análisis de datos en Hidalgo, México.</p>
+  </div>
+  <div class="contact-box reveal" style="transition-delay:.15s">
+    <p style="color:var(--muted);font-size:13px;">Correo electrónico</p>
+    <!-- ⚠️ REEMPLAZA con tu correo real -->
+    <a href="mailto:tucorreo@ejemplo.com" class="contact-email">tucorreo@ejemplo.com</a>
+    <div class="contact-links">
+      <a href="https://www.linkedin.com/in/ioannes-schroeder-7b46872a0/" target="_blank" class="btn btn-ghost">
+        <svg viewBox="0 0 24 24" style="width:14px;height:14px;flex-shrink:0;"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zm1.78 13.02H3.56V9h3.56v11.45zM22.23 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.46C23.2 24 24 23.23 24 22.28V1.72C24 .77 23.2 0 22.23 0z" fill="#0A66C2"/></svg>
+        LinkedIn
+      </a>
+      <!-- ⚠️ REEMPLAZA con tu usuario GitHub real -->
+      <a href="https://github.com/tu-usuario" target="_blank" class="btn btn-ghost">
+        <svg viewBox="0 0 24 24" style="width:14px;height:14px;flex-shrink:0;"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.66-.22.66-.48v-1.69c-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.26-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.38.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48C19.14 20.16 22 16.42 22 12c0-5.52-4.48-10-10-10z" fill="#e2eaf4"/></svg>
+        GitHub
+      </a>
+      <a href="CV_Ioannes_Schroeder_ATS.docx" download class="btn btn-primary">Descargar CV</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Ioannes Schroeder Hernández</span>
+  <span>Médico Laboral · OSH Admin · BI Analyst Jr. · Pachuca, Hidalgo</span>
+</footer>
+
+<script>
+  // Hamburger
+  const toggle = document.getElementById('nav-toggle');
+  const navEl  = document.getElementById('main-nav');
+  toggle.addEventListener('click', () => navEl.classList.toggle('nav-open'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => navEl.classList.remove('nav-open')));
+
+  // Reveal on scroll
+  const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Skill bars
+  const barObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.querySelectorAll('.skill-fill').forEach(f => f.style.width = f.dataset.w + '%'); });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.skills-list').forEach(el => barObs.observe(el));
+
+  // Nav active
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => { if(window.scrollY >= s.offsetTop - 100) cur = s.id; });
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+  }, { passive: true });
+</script>
+</body>
+</html>
