@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ioannes Schroeder — Médico Laboral & BI Analyst</title>
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -19,6 +20,51 @@
     --muted:   #5a7080;
     --card:    #111820;
   }
+  /* Estilos para las tarjetas del Portafolio */
+  .p-card-thumb {
+    position: relative;
+    height: 180px; /* Altura fija para consistencia */
+    overflow: hidden;
+    background: var(--bg3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .p-project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recorta la imagen para llenar el espacio sin deformarse */
+    object-position: center;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .p-card:hover .p-project-img {
+    transform: scale(1.1); /* Efecto de zoom al pasar el mouse */
+  }
+
+  .p-thumb-logo {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 10;
+    background: rgba(10, 13, 18, 0.7); /* Fondo oscuro semitransparente */
+    backdrop-filter: blur(4px);
+    padding: 6px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .p-thumb-logo svg {
+    width: 20px;
+    height: 20px;
+}
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
@@ -165,7 +211,9 @@
 
   @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
   @keyframes scrollPulse { 0%,100% { opacity: .3; } 50% { opacity: 1; } }
-  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal { opacity: 1; transform: none; }
+  .js-loaded .reveal { opacity: 0; transform: translateY(20px); transition: opacity .65s ease, transform .65s ease; }
+  .js-loaded .reveal.visible { opacity: 1; transform: none; }
   .reveal.visible { opacity: 1; transform: none; }
 
   @media (max-width: 860px) {
@@ -233,7 +281,7 @@
     <!-- foto -->
     <div class="hero-photo-wrap">
       <div class="hero-photo-frame">
-        <img src="gem_color.jpg" alt="Ioannes Schroeder Hernández">
+        <img src="assets/gem_color.jpg" alt="Ioannes Schroeder Hernández">
       </div>
       <div class="hero-photo-name">Ioannes Schroeder H.<br><span style="color:var(--accent);font-size:10px;">Pachuca, Hidalgo · MX</span></div>
     </div>
@@ -247,7 +295,7 @@
 <section id="perfil">
   <div class="reveal">
     <div class="section-label">// 01 — Perfil</div>
-    <h2>Donde la medicina<br>se encuentra con los datos</h2>
+    <h2>Datos y decisiones<br> que cuidan Organizaciones y Vidas</h2>
     <p class="about-text">Médico General con experiencia en administración de servicios médicos empresariales en los sectores de autotransporte de pasajeros y comercio al por menor. Especializado en cumplimiento normativo, gestión preventiva y en la <strong>automatización de reportes y visualización de indicadores</strong>.</p>
     <p class="about-text" style="margin-top:14px;">Formación activa en <strong>Business Intelligence</strong> con ruta en Platzi, certificación Google Cloud y experiencia real en producción con Power BI, Looker Studio y Python.</p>
 
@@ -326,13 +374,14 @@
       <div class="exp-title">Coordinador de Salud Ocupacional</div>
       <div class="exp-company">Cadena Comercial OXXO — Pachuca de Soto, Hidalgo</div>
       <ul class="exp-bullets">
-        <li>Administré el servicio médico para <strong>1,600 colaboradores</strong> con enfoque preventivo en SST.</li>
-        <li>Automaticé reportes con Python + Power BI, reduciendo el tiempo de generación en un <strong>50%</strong>.</li>
+        <li>Administré servicio médico para <strong>1,600 colaboradores</strong> con enfoque preventivo en SST.</li>
+        <li>Automaticé reportes con Python/ JavaScript(GAS) + Power BI, reduciendo el tiempo de generación en un <strong>50%</strong>.</li>
         <li>Desarrollé dashboards SASSO de accidentabilidad y ausentismo en tiempo real.</li>
-        <li>Planifiqué campañas de salud, exámenes preventivos y negocié convenios SGMM.</li>
+        <li>Planifiqué campañas de salud, exámenes preventivos y negocié convenios comerciales.</li>
         <li>Gestioné inventario, pagos y coordiné con IMSS y STPS (ST-7, ST-9).</li>
+        <li>Investigué accidentes e implementé acciones correctivas de seguridad hacia causas raíz.</li>
       </ul>
-      <div class="exp-tags"><span class="exp-tag">Power BI</span><span class="exp-tag">Python</span><span class="exp-tag">ISO 45001</span><span class="exp-tag">SGMM</span><span class="exp-tag">STPS</span></div>
+      <div class="exp-tags"><span class="exp-tag">Power BI</span><span class="exp-tag">Python</span><span class="exp-tag">HTML</span><span class="exp-tag">ISO 45001</span><span class="exp-tag">SGMM</span><span class="exp-tag">STPS</span></div>
     </div>
 
     <div class="exp-card reveal" style="transition-delay:.2s">
@@ -341,15 +390,14 @@
         <div class="exp-logo-badge" style="background:#1a3a6e;color:#fff;font-size:11px;padding:6px 10px;height:36px;text-align:center;line-height:1.2;">AVM<br><span style="font-size:9px;opacity:.7">S.A.</span></div>
       </div>
       <div class="exp-title">Médico Laboral</div>
-      <div class="exp-company">Autotransportes del Valle del Mezquital S.A. de C.V. — Tula de Allende, Hgo.</div>
+      <div class="exp-company">Autotransportes del Valle del Mezquital S.A. de C.V. — Tula de Allende, Hidalgo.</div>
       <ul class="exp-bullets">
-        <li>Coordiné equipo de <strong>15 personas</strong> en consultorios de 5 ciudades simultáneas.</li>
-        <li>Fungí como <strong>Data Lead</strong>: indicadores, inventario, proyecciones y metas del área médica.</li>
-        <li>Implementé dashboards en Power BI y Google Data Studio para seguimiento operativo.</li>
-        <li>Investigué accidentes e implementé acciones correctivas de seguridad.</li>
-        <li>Operé en empresa certificada bajo <strong>ISO 9001</strong> — Sistema de Gestión de Calidad.</li>
+        <li>Coordiné equipo de <strong>15 personas</strong> en consultorios de 5 ciudades simultáneamente, en materia de Planeación, Operación y Mejora continua.</li>
+        <li>Fungí como <strong>Data Lead</strong> del Servicio: indicadores, inventario, proyecciones y metas del área médica.</li>
+        <li>Implementé dashboards en Looker Studio para seguimiento operativo.</li>
+        <li>Operé en empresa certificada bajo <strong>ISO 9001</strong> — Sistema de Gestión de Calidad y participé el ejercicio de Auditorías internas y externas.</li>
       </ul>
-      <div class="exp-tags"><span class="exp-tag">Data Studio</span><span class="exp-tag">ISO 9001</span><span class="exp-tag">Liderazgo</span><span class="exp-tag">HTML</span></div>
+      <div class="exp-tags"><span class="exp-tag">Looker Studio</span><span class="exp-tag">ISO 9001</span><span class="exp-tag">Liderazgo</span></div>
     </div>
   </div>
 </section>
@@ -361,52 +409,104 @@
   <div class="reveal">
     <div class="portfolio-header">
       <div><div class="section-label">// 03 — Portafolio</div><h2>Proyectos destacados</h2></div>
-      <div class="portfolio-note">🟢 En línea &nbsp;|&nbsp; 🟡 Próximamente</div>
+      <div class="portfolio-note">🟢 En línea  |  🟡 Próximamente</div>
     </div>
   </div>
   <div class="portfolio-grid">
 
-    <!-- Power BI SVG reutilizable -->
     <a href="#" class="p-card reveal" style="transition-delay:.05s">
-      <div class="p-card-thumb">📊<div class="p-thumb-logo"><svg viewBox="0 0 24 24"><rect width="4" height="10" x="1" y="14" rx="1" fill="#F2C811"/><rect width="4" height="14" x="7" y="10" rx="1" fill="#F2C811" opacity=".8"/><rect width="4" height="18" x="13" y="6" rx="1" fill="#F2C811" opacity=".6"/><rect width="4" height="22" x="19" y="2" rx="1" fill="#F2C811" opacity=".4"/></svg></div></div>
-      <div class="p-card-body"><div class="p-card-label">Power BI · Salud Laboral</div><div class="p-card-title">Dashboard de Indicadores SASSO</div><div class="p-card-desc">Tablero de mando con métricas de accidentabilidad, ausentismo y enfermedad general. Filtros por área y comparativas históricas.</div></div>
+      <div class="p-card-thumb">
+        <img src="assets/dashboard.png" alt="Dashboard SASSO" class="p-project-img">
+        <div class="p-thumb-logo"><svg viewBox="0 0 24 24"><rect width="4" height="10" x="1" y="14" rx="1" fill="#F2C811"/><rect width="4" height="14" x="7" y="10" rx="1" fill="#F2C811" opacity=".8"/><rect width="4" height="18" x="13" y="6" rx="1" fill="#F2C811" opacity=".6"/><rect width="4" height="22" x="19" y="2" rx="1" fill="#F2C811" opacity=".4"/></svg></div>
+      </div>
+      <div class="p-card-body">
+        <div class="p-card-label">Power BI · Salud Laboral</div>
+        <div class="p-card-title">Dashboard de Indicadores SASSO</div>
+        <div class="p-card-desc">Tablero de mando con métricas de accidentabilidad, ausentismo y enfermedad general. Filtros por área y comparativas históricas.</div>
+      </div>
+      <div class="p-card-footer"><div class="p-status"><div class="p-status-dot dot-local"></div><span style="color:#f0a500">Próximamente</span></div><div class="p-arrow" style="opacity:.3">→</div></div>
+    </a>
+
+    <a href="https://www.google.com/maps/d/edit?mid=1gYpCAAyuW_XCE-eFfgnVzPf9hjt0gVM&usp=sharing" class="p-card reveal" style="transition-delay:.1s">
+      <div class="p-card-thumb">
+        <img src="assets/my_maps.png" alt="Mapa de Sucursales" class="p-project-img">
+        <div class="p-thumb-logo"><svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="5" fill="#4285F4"/><circle cx="15" cy="15" r="5" fill="#EA4335" opacity=".85"/><circle cx="15" cy="9" r="5" fill="#FBBC05" opacity=".85"/><circle cx="9" cy="15" r="5" fill="#34A853" opacity=".85"/></svg></div>
+      </div>
+      <div class="p-card-body">
+        <div class="p-card-label">Google My Maps · Georreferenciación</div>
+        <div class="p-card-title">Mapa de Puntos de Operación</div>
+        <div class="p-card-desc">Visualización georreferenciada de puntos de servicio con datos operativos superpuestos y análisis de patrones territoriales.</div>
+      </div>
       <div class="p-card-footer"><div class="p-status"><div class="p-status-dot dot-live"></div><span style="color:var(--green)">En línea</span></div><div class="p-arrow">→</div></div>
     </a>
 
-    <a href="#" class="p-card reveal" style="transition-delay:.1s">
-      <div class="p-card-thumb">🗺️<div class="p-thumb-logo"><svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="5" fill="#4285F4"/><circle cx="15" cy="15" r="5" fill="#EA4335" opacity=".85"/><circle cx="15" cy="9" r="5" fill="#FBBC05" opacity=".85"/><circle cx="9" cy="15" r="5" fill="#34A853" opacity=".85"/></svg></div></div>
-      <div class="p-card-body"><div class="p-card-label">Looker Studio · Georreferenciación</div><div class="p-card-title">Mapa de Tiendas</div><div class="p-card-desc">Visualización georreferenciada de puntos de servicio con datos operativos superpuestos y análisis de patrones territoriales.</div></div>
+    <a href="https://app.awesome-table.com/-Ok-1MwNh-VouDtRtNjm/view" class="p-card reveal" style="transition-delay:.15s">
+      <div class="p-card-thumb">
+        <img src="assets/estructura.png" alt="Estructura de Empleados" class="p-project-img">
+        <div class="p-thumb-logo"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.66-.22.66-.48v-1.69c-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.26-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.38.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48C19.14 20.16 22 16.42 22 12c0-5.52-4.48-10-10-10z" fill="#e2eaf4"/></svg></div>
+      </div>
+      <div class="p-card-body">
+        <div class="p-card-label">HTML · Estructura</div>
+        <div class="p-card-title">Estructura de Empleados HTML</div>
+        <div class="p-card-desc">Reporte interactivo de plantilla y asignación de turnos generado dinámicamente con filtros por criterios operativos.</div>
+      </div>
       <div class="p-card-footer"><div class="p-status"><div class="p-status-dot dot-live"></div><span style="color:var(--green)">En línea</span></div><div class="p-arrow">→</div></div>
     </a>
 
-    <a href="#" class="p-card reveal" style="transition-delay:.15s">
-      <div class="p-card-thumb">🏗️<div class="p-thumb-logo"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.66-.22.66-.48v-1.69c-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.26-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.38.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48C19.14 20.16 22 16.42 22 12c0-5.52-4.48-10-10-10z" fill="#e2eaf4"/></svg></div></div>
-      <div class="p-card-body"><div class="p-card-label">HTML · Python · Estructura</div><div class="p-card-title">Estructura de Empleados HTML</div><div class="p-card-desc">Reporte interactivo de plantilla y asignación de turnos generado dinámicamente con filtros por criterios operativos.</div></div>
-      <div class="p-card-footer"><div class="p-status"><div class="p-status-dot dot-live"></div><span style="color:var(--green)">En línea</span></div><div class="p-arrow">→</div></div>
-    </a>
-
-    <a href="#" class="p-card reveal" style="transition-delay:.2s">
-      <div class="p-card-thumb">⏱️<div class="p-thumb-logo"><svg viewBox="0 0 24 24"><rect width="4" height="10" x="1" y="14" rx="1" fill="#F2C811"/><rect width="4" height="14" x="7" y="10" rx="1" fill="#F2C811" opacity=".8"/><rect width="4" height="18" x="13" y="6" rx="1" fill="#F2C811" opacity=".6"/><rect width="4" height="22" x="19" y="2" rx="1" fill="#F2C811" opacity=".4"/></svg></div></div>
-      <div class="p-card-body"><div class="p-card-label">Power BI · Operaciones</div><div class="p-card-title">Aprovechamiento de Turnos</div><div class="p-card-desc">Análisis de eficiencia de turnos médicos. Detecta patrones de demanda, tiempos de espera y oportunidades de optimización.</div></div>
+    <a href="https://lookerstudio.google.com/reporting/daac3e28-0d7a-41f2-9356-271d394b58c2" class="p-card reveal" style="transition-delay:.2s">
+      <div class="p-card-thumb">
+        <img src="assets/looker.png" alt="Aprovechamiento de Turnos" class="p-project-img">
+        <div class="p-thumb-logo"><svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="5" fill="#4285F4"/><circle cx="15" cy="15" r="5" fill="#EA4335" opacity=".85"/><circle cx="15" cy="9" r="5" fill="#FBBC05" opacity=".85"/><circle cx="9" cy="15" r="5" fill="#34A853" opacity=".85"/></svg></div>
+      </div>
+      <div class="p-card-body">
+        <div class="p-card-label">Looker Studio · Operaciones</div>
+        <div class="p-card-title">Aprovechamiento de Turnos</div>
+        <div class="p-card-desc">Análisis de eficiencia de turnos médicos. Detecta patrones de demanda, tiempos de espera y oportunidades de optimización.</div>
+      </div>
       <div class="p-card-footer"><div class="p-status"><div class="p-status-dot dot-live"></div><span style="color:var(--green)">En línea</span></div><div class="p-arrow">→</div></div>
     </a>
 
     <a href="#" class="p-card reveal" style="transition-delay:.25s">
-      <div class="p-card-thumb">⚙️<div class="p-thumb-logo"><svg viewBox="0 0 24 24"><path d="M11.9 2C9.2 2 9.5 3.1 9.5 3.1V5h5v.5H7.5S5 5.2 5 8s2.8 2.6 2.8 2.6h1.7v-1.3S9.3 8 10.5 8h4.8s2.7.04 2.7-2.6V4.2S18.3 2 11.9 2zm-1.4 1.5a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8zM12.1 22c2.7 0 2.4-1.1 2.4-1.1V18.9h-5v-.5h7s2.5.3 2.5-2.5-2.8-2.6-2.8-2.6h-1.7v1.3s.2 1.3-1 1.3H9.7S7 15.9 7 18.5v2.2S6.7 22 12.1 22zm1.4-1.5a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8z" fill="#3776AB"/></svg></div></div>
-      <div class="p-card-body"><div class="p-card-label">Python · Cloud · ETL</div><div class="p-card-title">Pipeline ETL de Reportes</div><div class="p-card-desc">Automatización del proceso de extracción, transformación y carga hacia plataformas de visualización. Reducción del 50% en tiempo de reporte.</div></div>
+      <div class="p-card-thumb">
+        <img src="assets/pipeline.png" alt="Pipeline ETL" class="p-project-img">
+        <div class="p-thumb-logo"><svg viewBox="0 0 24 24"><path d="M11.9 2C9.2 2 9.5 3.1 9.5 3.1V5h5v.5H7.5S5 5.2 5 8s2.8 2.6 2.8 2.6h1.7v-1.3S9.3 8 10.5 8h4.8s2.7.04 2.7-2.6V4.2S18.3 2 11.9 2zm-1.4 1.5a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8zM12.1 22c2.7 0 2.4-1.1 2.4-1.1V18.9h-5v-.5h7s2.5.3 2.5-2.5-2.8-2.6-2.8-2.6h-1.7v1.3s.2 1.3-1 1.3H9.7S7 15.9 7 18.5v2.2S6.7 22 12.1 22zm1.4-1.5a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8z" fill="#3776AB"/></svg></div>
+      </div>
+      <div class="p-card-body">
+        <div class="p-card-label">Python · Cloud · ETL</div>
+        <div class="p-card-title">Pipeline ETL de Reportes</div>
+        <div class="p-card-desc">Automatización del proceso de extracción, transformación y carga hacia plataformas de visualización. Reducción del 50% en tiempo de reporte.</div>
+      </div>
       <div class="p-card-footer"><div class="p-status"><div class="p-status-dot dot-local"></div><span style="color:#f0a500">Próximamente</span></div><div class="p-arrow" style="opacity:.3">→</div></div>
     </a>
 
-    <a href="#" class="p-card reveal" style="transition-delay:.3s">
-      <div class="p-card-thumb">🏛️<div class="p-thumb-logo"><svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="5" fill="#4285F4"/><circle cx="15" cy="15" r="5" fill="#EA4335" opacity=".85"/><circle cx="15" cy="9" r="5" fill="#FBBC05" opacity=".85"/><circle cx="9" cy="15" r="5" fill="#34A853" opacity=".85"/></svg></div></div>
-      <div class="p-card-body"><div class="p-card-label">Looker Studio · Sector Público</div><div class="p-card-title">Dashboard Servicios Públicos</div><div class="p-card-desc">Indicadores de cobertura y rendimiento para servicios de atención pública con integración de fuentes institucionales.</div></div>
-      <div class="p-card-footer"><div class="p-status"><div class="p-status-dot dot-local"></div><span style="color:#f0a500">Próximamente</span></div><div class="p-arrow" style="opacity:.3">→</div></div>
-    </a>
+    <!-- Servicios Públicos — abre modal con iframe embebido -->
+    <div class="p-card reveal" style="transition-delay:.3s; cursor:pointer;" onclick="openModal()">
+      <div class="p-card-thumb">
+        <img src="assets/servicios.png" alt="Dashboard Sector Público" class="p-project-img">
+        <div class="p-thumb-logo"><svg viewBox="0 0 24 24"><rect width="4" height="10" x="1" y="14" rx="1" fill="#F2C811"/><rect width="4" height="14" x="7" y="10" rx="1" fill="#F2C811" opacity=".8"/><rect width="4" height="18" x="13" y="6" rx="1" fill="#F2C811" opacity=".6"/><rect width="4" height="22" x="19" y="2" rx="1" fill="#F2C811" opacity=".4"/></svg></div>
+      </div>
+      <div class="p-card-body">
+        <div class="p-card-label">Power BI · Sector Público · Forecasting</div>
+        <div class="p-card-title">Dashboard Servicios Públicos</div>
+        <div class="p-card-desc">Indicadores de cobertura y costo de servicios de atención pública, con integración de fuentes institucionales y predicción de resultados con regresión lineal.</div>
+      </div>
+      <div class="p-card-footer">
+        <div class="p-status"><div class="p-status-dot dot-live"></div><span style="color:var(--green)">En línea</span></div>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <a href="https://app.powerbi.com/view?r=eyJrIjoiZDE5NmJhZTQtMTdlMi00ZDIxLTg2OGEtZTFiMmEyODlmZDQzIiwidCI6IjI0NDk4NWEzLWExMmYtNGE3YS04NWQwLWM1NmFjMTFhMjI4MyJ9"
+             target="_blank"
+             onclick="event.stopPropagation()"
+             style="font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.08em; color:var(--muted); text-decoration:none; transition:color .2s;"
+             onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">
+            ↗ Abrir
+          </a>
+          <div class="p-arrow">⊞</div>
+        </div>
+      </div>
+    </div>
 
   </div>
 </section>
-
-<div class="divider"></div>
 
 <!-- CERTIFICACIONES -->
 <section id="certificaciones">
@@ -454,21 +554,21 @@
   <div class="reveal">
     <div class="section-label" style="text-align:center">// 05 — Contacto</div>
     <h2 style="text-align:center">Hablemos</h2>
-    <p style="color:var(--muted);font-size:15px;margin-top:12px;text-align:center;">Abierto a oportunidades en salud ocupacional, seguridad industrial y análisis de datos en Hidalgo, México.</p>
+    <p style="color:var(--muted);font-size:15px;margin-top:12px;text-align:center;">Abierto a oportunidades para colaborar en área de Salud ocupacional, Seguridad Industrial y Análisis de datos en Hidalgo, México.</p>
   </div>
   <div class="contact-box reveal" style="transition-delay:.15s">
     <p style="color:var(--muted);font-size:13px;">Correo electrónico</p>
     <!-- ⚠️ REEMPLAZA con tu correo real -->
-    <a href="mailto:tucorreo@ejemplo.com" class="contact-email">tucorreo@ejemplo.com</a>
+    <a href="mailto:lambda2356@gmail.com" class="contact-email">lambda2356@gmail.com</a>
     <div class="contact-links">
       <a href="https://www.linkedin.com/in/ioannes-schroeder-7b46872a0/" target="_blank" class="btn btn-ghost">
         <svg viewBox="0 0 24 24" style="width:14px;height:14px;flex-shrink:0;"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zm1.78 13.02H3.56V9h3.56v11.45zM22.23 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.46C23.2 24 24 23.23 24 22.28V1.72C24 .77 23.2 0 22.23 0z" fill="#0A66C2"/></svg>
         LinkedIn
       </a>
       <!-- ⚠️ REEMPLAZA con tu usuario GitHub real -->
-      <a href="https://github.com/tu-usuario" target="_blank" class="btn btn-ghost">
+      <a href="https://github.com/SchroeDEV2356" target="_blank" class="btn btn-ghost">
         <svg viewBox="0 0 24 24" style="width:14px;height:14px;flex-shrink:0;"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.66-.22.66-.48v-1.69c-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.26-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.38.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48C19.14 20.16 22 16.42 22 12c0-5.52-4.48-10-10-10z" fill="#e2eaf4"/></svg>
-        GitHub
+        SchroeDEV2356
       </a>
       <a href="CV_Ioannes_Schroeder_ATS.docx" download class="btn btn-primary">Descargar CV</a>
     </div>
@@ -480,7 +580,118 @@
   <span>Médico Laboral · OSH Admin · BI Analyst Jr. · Pachuca, Hidalgo</span>
 </footer>
 
-<script>
+<!-- MODAL Power BI -->
+<div id="pbi-modal" style="
+  display:none; position:fixed; inset:0; z-index:999;
+  background:rgba(5,8,12,0.92); backdrop-filter:blur(8px);
+  align-items:center; justify-content:center; padding:24px;
+">
+  <div style="
+    background:var(--card); border:1px solid var(--border);
+    border-radius:6px; width:100%; max-width:960px;
+    display:flex; flex-direction:column; overflow:hidden;
+    box-shadow:0 32px 80px rgba(0,0,0,.6);
+    position:relative;
+  ">
+    <!-- header del modal -->
+    <div style="
+      display:flex; justify-content:space-between; align-items:center;
+      padding:16px 24px; border-bottom:1px solid var(--border);
+    ">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <svg viewBox="0 0 24 24" style="width:18px;height:18px;flex-shrink:0;">
+          <rect width="4" height="10" x="1" y="14" rx="1" fill="#F2C811"/>
+          <rect width="4" height="14" x="7" y="10" rx="1" fill="#F2C811" opacity=".8"/>
+          <rect width="4" height="18" x="13" y="6" rx="1" fill="#F2C811" opacity=".6"/>
+          <rect width="4" height="22" x="19" y="2" rx="1" fill="#F2C811" opacity=".4"/>
+        </svg>
+        <div>
+          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:15px;">Dashboard Servicios Públicos</div>
+          <div style="font-family:'Space Mono',monospace; font-size:10px; color:var(--accent); letter-spacing:.1em; margin-top:2px;">POWER BI · SECTOR PÚBLICO · FORECASTING</div>
+        </div>
+      </div>
+      <div style="display:flex; gap:12px; align-items:center;">
+        <a href="https://app.powerbi.com/view?r=eyJrIjoiZDE5NmJhZTQtMTdlMi00ZDIxLTg2OGEtZTFiMmEyODlmZDQzIiwidCI6IjI0NDk4NWEzLWExMmYtNGE3YS04NWQwLWM1NmFjMTFhMjI4MyJ9"
+           target="_blank"
+           style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.08em; color:var(--muted); text-decoration:none; padding:6px 14px; border:1px solid var(--border); border-radius:3px; transition:all .2s;"
+           onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'"
+           onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">
+          ↗ Pantalla completa
+        </a>
+        <button onclick="closeModal()" style="
+          background:none; border:1px solid var(--border); color:var(--muted);
+          width:32px; height:32px; border-radius:3px; cursor:pointer; font-size:16px;
+          display:flex; align-items:center; justify-content:center;
+          transition:all .2s;
+        " onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'"
+           onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">✕</button>
+      </div>
+    </div>
+    <!-- iframe -->
+    <div style="position:relative; width:100%; padding-bottom:52%; background:var(--bg3);">
+      <iframe
+        id="pbi-iframe"
+        title="servicios_hgo"
+        src=""
+        data-src="https://app.powerbi.com/view?r=eyJrIjoiZDE5NmJhZTQtMTdlMi00ZDIxLTg2OGEtZTFiMmEyODlmZDQzIiwidCI6IjI0NDk4NWEzLWExMmYtNGE3YS04NWQwLWM1NmFjMTFhMjI4MyJ9"
+        frameborder="0"
+        allowFullScreen="true"
+        style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;">
+      </iframe>
+      <!-- loading state -->
+      <div id="pbi-loading" style="
+        position:absolute; inset:0; display:flex; flex-direction:column;
+        align-items:center; justify-content:center; gap:14px;
+        background:var(--bg3); z-index:2; pointer-events:none;
+      ">
+        <div style="width:36px; height:36px; border:2px solid var(--border); border-top-color:var(--accent); border-radius:50%; animation:spin .8s linear infinite;"></div>
+        <div style="font-family:'Space Mono',monospace; font-size:11px; color:var(--muted); letter-spacing:.1em;">Cargando reporte…</div>
+      </div>
+    </div>
+    <!-- footer del modal -->
+    <div style="padding:12px 24px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+      <div style="font-family:'Space Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:.08em;">
+        Forecasting con regresión lineal · Power BI Service
+      </div>
+      <div style="font-family:'Space Mono',monospace; font-size:10px; color:var(--border);">
+        Presiona ESC para cerrar
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes spin { to { transform:rotate(360deg); } }
+  #pbi-modal.active { display:flex; animation:fadeUp .25s ease both; }
+</style>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  function openModal() {
+    const modal = document.getElementById('pbi-modal');
+    const iframe = document.getElementById('pbi-iframe');
+    const loading = document.getElementById('pbi-loading');
+    // lazy-load: solo asigna src la primera vez
+    if (!iframe.src || iframe.src === window.location.href) {
+      iframe.src = iframe.dataset.src;
+      iframe.onload = () => { loading.style.display = 'none'; };
+    } else {
+      loading.style.display = 'none';
+    }
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('pbi-modal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('pbi-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // Activar animaciones sólo cuando JS está disponible
+  document.body.classList.add('js-loaded');
+
   // Hamburger
   const toggle = document.getElementById('nav-toggle');
   const navEl  = document.getElementById('main-nav');
@@ -488,8 +699,15 @@
   document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => navEl.classList.remove('nav-open')));
 
   // Reveal on scroll
-  const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
+  const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0, rootMargin: "0px 0px -40px 0px" });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  // Forzar visibilidad de elementos ya en pantalla al cargar
+  setTimeout(() => {
+    document.querySelectorAll('.reveal').forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight) el.classList.add('visible');
+    });
+  }, 100);
 
   // Skill bars
   const barObs = new IntersectionObserver(entries => {
